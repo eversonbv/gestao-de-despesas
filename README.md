@@ -2,11 +2,11 @@
 Projeto Final da disciplina Frameworks Web - UTFPR
 # Gestão de despesas e formas de pagamento
 Principais Funcionalidades:
-● Cadastro de Tipos de Despesas (ex. Conta de Luz, Viagem, Remédios, Presente, Roupa, Internet, …)
-● Cadastro de Receitas
-● Cadastro de Formas de Pagamento (ex. Cartão de Crédito, Cartão de Débito, Dinheiro, PIX, …)
-● Cadastro de Despesas (Data, Tipo da Despesa, Valor, Forma de Pagamento)
-● Tela de Acompanhamento das Receitas X Despesas
+- Cadastro de Tipos de Despesas (ex. Conta de Luz, Viagem, Remédios, Presente, Roupa, Internet, …)
+- Cadastro de Receitas
+- Cadastro de Formas de Pagamento (ex. Cartão de Crédito, Cartão de Débito, Dinheiro, PIX, …)
+- Cadastro de Despesas (Data, Tipo da Despesa, Valor, Forma de Pagamento)
+- Tela de Acompanhamento das Receitas X Despesas
 
 # Protótipo
 https://www.figma.com/file/lRyaEmv3tqqvse7VXwfnEs/gestao-despesas?node-id=0%3A1
