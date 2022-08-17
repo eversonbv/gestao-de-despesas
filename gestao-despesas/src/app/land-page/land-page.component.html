@@ -1,0 +1,46 @@
+<div
+  class="intro blue z-depth-1 my-logo-text"
+  [ngStyle]="this.getBackgroundImage()"
+>
+  <h1 class="grey-text text-lighten-5">Gestão de Depesas</h1>
+  <h4 class="blue-text text-darken-1">Controle suas Despesas de forma simples!</h4>
+</div>
+
+<div class="container about">
+  <!-- painel serviços  -->
+  <div id="painel-opcoes" [hidden]="this.isHidePanel">
+    <h5>Opções</h5>
+    <hr />
+    <div class="row">
+      <!-- serviços -->
+      <div class="col s12 m6">
+        <a href="#">
+          <div class="card-panel amber accent-4 center my-card-button">
+            <span class="white-text flow-text"> DESPESAS </span>
+          </div>
+        </a>
+      </div>
+      <div class="col s12 m6">
+        <a href="#">
+          <div class="card-panel amber accent-4 center my-card-button">
+            <span class="white-text flow-text"> RECEITAS </span>
+          </div>
+        </a>
+      </div>
+      <div class="col s12 m6">
+        <a href="#">
+          <div class="card-panel amber accent-4 center my-card-button">
+            <span class="white-text flow-text"> DESPESAS X RECEITAS </span>
+          </div>
+        </a>
+      </div>
+      <div class="col s12 m6">
+        <a href="#">
+          <div class="card-panel amber accent-4 center my-card-button">
+            <span class="white-text flow-text"> FORMAS DE PAGAMENTO </span>
+          </div>
+        </a>
+      </div>
+      <!-- opções -->
+    </div>
+  </div>
