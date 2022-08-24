@@ -1,3 +1,7 @@
 .my-logo {
   height: 64px;
 }
+
+a {
+  font-size: 1.2vw;
+}

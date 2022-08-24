@@ -15,12 +15,6 @@
   border: 0;
 }
 
-body,
-html {
-  background-color: #ededed !important;
-  font-size: 0.8vw;
-}
-
 hr {
   width: 20% !important;
   border-bottom-color: var(--primaryColor);
@@ -132,4 +126,39 @@ table > tbody > tr {
   color: #333333;
   display: inline-block;
   font-size: 1.2rem;
+}
+
+.contact .col {
+  margin-bottom: 24px;
+}
+
+.contact h5 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.contact h6 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 45px;
+}
+
+.contact hr {
+  width: 40px;
+  margin-bottom: 45px;
+}
+
+.contact .contact-holder {
+  padding-left: 40px;
+  text-align: left;
+}
+
+.contact .contact-holder h6 {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.contact .contact-holder p {
+  margin-bottom: 30px;
 }
