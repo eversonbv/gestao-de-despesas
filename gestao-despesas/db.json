@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "everson.volaco",
+      "password": "12345678",
+      "balance": 1000.1
+    },
+    {
+      "id": "2",
+      "username": "natalia.volaco",
+      "password": "123456",
+      "balance": 500
+    }
+  ],
+  "expenseTypes": [
+    {
+      "id": 1,
+      "description": "Cartão de Crédito"
+    },
+    {
+      "id": 2,
+      "description": "Dinheiro"
+    },
+    {
+      "id": 3,
+      "description": "PIX"
+    }
+  ],
+  "revenues": [
+    {
+      "id": 1,
+      "description": "Salário Fevereiro",
+      "value": 2000
+    },
+    {
+      "id": 2,
+      "description": "Salário Março",
+      "value": 2000
+    },
+    {
+      "id": 3,
+      "description": "Bico",
+      "value": 3000
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+<app-modal [show]="modal.show" [content]="modal" (closeEvent)="onCloseModal()">
+</app-modal>
+<div class="container contact">
+  <h5>Receitas</h5>
+  <hr />
+
+  <div class="row">
+    <div class="col s12">
+      <div
+        id="div-deposit-message"
+        class="card-panel white-text"
+        [hidden]="!this.revenueMessage"
+        [class.red]="this.revenueInvalid"
+        [class.blue]="!this.revenueInvalid"
+      >
+        {{ this.revenueMessage }}
+      </div>
+    </div>
+    <form class="col s12" (submit)="onSubmit()">
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="input-description"
+            name="input-description"
+            type="text"
+            class="validate"
+            [(ngModel)]="this.description"
+          />
+          <label for="input-description">Descrição</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="input-deposit"
+            name="input-deposit"
+            type="text"
+            class="validate money"
+            [(ngModel)]="this.value"
+            mask="separator.2"
+            [thousandSeparator]="'.'"
+            [decimalMarker]="','"
+            prefix="R$ "
+            [dropSpecialCharacters]="true"
+            [showMaskTyped]="false"
+          />
+          <label for="input-deposit" class="active">Valor de depósito</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light blue darken-4" type="submit">
+        Depositar
+        <i class="material-icons right">save</i>
+      </button>
+      <button
+        style="margin-left: 10px"
+        class="btn waves-effect waves-light blue darken-4"
+        type="button"
+        (click)="onResetClick()"
+      >
+        Apagar
+        <i class="material-icons right">delete</i>
+      </button>
+    </form>
+  </div>
+
+  <p>Valor: {{ this.value }}</p>
+
+  <h5>Saldo Atual</h5>
+  <app-saldo-corrente
+    #balance
+    [value]="this.user.balance"
+    (saldoPositivoEvento)="this.onSaldoPositivoEvento($event)"
+  ></app-saldo-corrente>
+</div>
