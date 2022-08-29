@@ -21,6 +21,7 @@
           type="text"
           class="validate"
           [(ngModel)]="this.expenseType.description"
+          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)*"
           #description="ngModel"
           required
         />
