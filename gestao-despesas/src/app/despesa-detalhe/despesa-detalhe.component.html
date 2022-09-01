@@ -1,0 +1,32 @@
+<div class="container contact">
+  <h5>Despesa</h5>
+  <h6>Detalhes da Despesa (ID:{{ this.expense.id }})</h6>
+  <hr />
+  <form class="col s12" #form="ngForm">
+    <div class="row">
+      <ul class="collection col s12 offset-m3 m6">
+        <li class="collection-item">
+          <span class="badge left">ID:</span>{{ this.expense.id }}
+        </li>
+        <li class="collection-item">
+          <span class="badge left">Descrição:</span
+          >{{ this.expense.description }}
+        </li>
+        <li class="collection-item">
+          <span class="badge left">Valor:</span
+          >{{ this.expense.value | currency: "BRL" }}
+        </li>
+        <li class="collection-item">
+          <span class="badge left">Forma de Pagamento:</span
+          >{{ this.expenseTypeDescription }}
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col s12 m6 offset-m3 center">
+    <a routerLink="/despesa"> Retornar a tela de Despesas</a>
+  </div>
+</div>
