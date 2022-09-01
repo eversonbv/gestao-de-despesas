@@ -1,6 +1,6 @@
 {
   "/receitas": "/revenues",
-  "/formas-pagamento": "/expenseTypes",
+  "/formas-pagamento": "/expensetypes",
   "/despesas": "/expenses",
   "/usuarios": "/users"
 }

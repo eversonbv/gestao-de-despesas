@@ -24,17 +24,35 @@ export class FormasPagamentoComponent implements OnInit {
   constructor(private expenseTypeService: ExpenseTypeStorageService) { }
 
   ngOnInit(): void {
-    Shared.initializeWebStorage();
     this.expenseType = new ExpenseType(Math.round(Math.random() * 1000), '');
-    this.expenseTypes = this.expenseTypeService.getExpenseTypes();
+    this.listarFormasPagamento();
+  }
+
+  listarFormasPagamento() {
+    this.expenseTypeService.getExpenseTypes().subscribe(
+      (response) => {
+        this.expenseTypes = response as ExpenseType[];
+      },
+      (error) => {}
+    );
   }
 
   onSubmit() {
     this.isSubmitted = true;
-    if (!this.expenseTypeService.isExist(this.expenseType.description)) {
-      this.expenseTypeService.save(this.expenseType);
+    if (!this.expenseTypeService.isExist(this.expenseType.id)) {
+      this.expenseTypeService.save(this.expenseType).subscribe(
+        (response) => {
+          this.listarFormasPagamento();
+        },
+        (error) => {}
+      );
     } else {
-      this.expenseTypeService.update(this.expenseType);
+      this.expenseTypeService.update(this.expenseType.id, this.expenseType).subscribe(
+        (response) => {
+          this.listarFormasPagamento();
+        },
+        (error) => {}
+      );
     }
     this.isShowMessage = true;
     this.isSuccess = true;
@@ -43,9 +61,8 @@ export class FormasPagamentoComponent implements OnInit {
     this.form.reset();
     this.expenseType = new ExpenseType(Math.round(Math.random() * 1000), '');
 
-    this.expenseTypes = this.expenseTypeService.getExpenseTypes();
+    this.listarFormasPagamento();
 
-    this.expenseTypeService.notifyTotalExpenseTypes();
   }
 
   onEdit(expenseType: ExpenseType) {
@@ -60,7 +77,13 @@ export class FormasPagamentoComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.expenseTypeService.delete(id);
+    this.expenseTypeService.delete(id).subscribe(
+      (response) => {
+        this.listarFormasPagamento();
+      },
+      (error) => {}
+    );
+    let response: boolean = true;
     this.isShowMessage = true;
     this.isSuccess = response;
     if (response) {
@@ -68,7 +91,5 @@ export class FormasPagamentoComponent implements OnInit {
     } else {
       this.message = 'O item não pode ser removido!';
     }
-    this.expenseTypes = this.expenseTypeService.getExpenseTypes();
-    this.expenseTypeService.notifyTotalExpenseTypes();
   }
 }

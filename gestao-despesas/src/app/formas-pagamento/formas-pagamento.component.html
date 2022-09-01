@@ -16,6 +16,15 @@
     <form class="col s12" #form="ngForm" (submit)="onSubmit()">
       <div class="input-field col s12">
         <input
+          id="input-id"
+          name="input-id"
+          type="text"
+          [(ngModel)]="this.expenseType.id"
+          hidden="true"
+        />
+      </div>
+      <div class="input-field col s12">
+        <input
           id="input-description"
           name="input-description"
           type="text"
@@ -25,7 +34,7 @@
           #description="ngModel"
           required
         />
-        <label for="input-description">Descrição *</label>
+        <label for="input-description" class="active">Descrição *</label>
         <div class="red-text" [hidden]="description.valid || description.untouched">
           Informe a descrição
         </div>

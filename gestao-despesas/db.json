@@ -13,18 +13,46 @@
       "balance": 500
     }
   ],
-  "expenseTypes": [
+  "expensetypes": [
     {
       "id": 1,
-      "description": "Cartão de Crédito"
-    },
-    {
-      "id": 2,
       "description": "Dinheiro"
     },
     {
-      "id": 3,
+      "id": 2,
       "description": "PIX"
+    },
+    {
+      "id": 3,
+      "description": "Cartão de Crédito"
+    },
+    {
+      "id": 4,
+      "description": "Cartão de Débito"
+    },
+    {
+      "id": 121,
+      "description": "Vale Refeição"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "description": "Abastecimento Posto",
+      "value": 235,
+      "expenseTypeId": 1
+    },
+    {
+      "id": 2,
+      "description": "Café",
+      "value": 12,
+      "expenseTypeId": 2
+    },
+    {
+      "id": 3,
+      "description": "Mc Donalds Portão",
+      "value": 46,
+      "expenseTypeId": 3
     }
   ],
   "revenues": [

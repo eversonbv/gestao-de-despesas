@@ -1,65 +1,71 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 
 import { Constants } from 'src/app/util/constants';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { WebStorageUtil } from 'src/app/util/web-storage-util';
 import { ExpenseType } from '../model/expenseType';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ExpenseTypeStorageService {
+  apiUrl: string = 'http://localhost:3000/expensetypes';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   expenseTypes!: ExpenseType[];
-  private expenseTypeSource!: BehaviorSubject<number>;
-  constructor() {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    this.expenseTypeSource = new
-        BehaviorSubject<number>(this.expenseTypes != null ? this.expenseTypes.length : 0);
+
+  constructor(private http: HttpClient) {}
+
+  save(data: any): Observable<any> {
+    let API_URL = `${this.apiUrl}`;
+    return this.http.post(API_URL, data).pipe(catchError(this.handleError));
   }
 
-  save(expenseType: ExpenseType) {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    this.expenseTypes.push(expenseType);
-    WebStorageUtil.set(Constants.EXPENSETYPE_KEY, this.expenseTypes);
+  update(id: any, data: any): Observable<any> {
+    let API_URL = `${this.apiUrl}/${id}`;
+    return this.http
+      .put(API_URL, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
-  update(expenseType: ExpenseType) {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    this.delete(expenseType.id);
-    this.save(expenseType);
+  delete(id: number): Observable<ExpenseType> {
+    var API_URL = `${this.apiUrl}/${id}`;
+    return this.http
+      .delete<ExpenseType>(API_URL, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
-  delete(id: number): boolean {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    this.expenseTypes = this.expenseTypes.filter((e) => {
-      return e.id?.valueOf() != id?.valueOf();
+  isExist(value: number): boolean {
+    this.getExpenseTypes().subscribe((response) => {
+      this.expenseTypes = response as ExpenseType[];
     });
-
-    WebStorageUtil.set(Constants.EXPENSETYPE_KEY, this.expenseTypes);
-    return true;
-  }
-
-  isExist(value: string): boolean {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    if (this.expenseTypes == null)
-      return false;
-    for (let e of this.expenseTypes) {
-      if (e.description?.valueOf() == value?.valueOf()) {
+    if (this.expenseTypes == null) return false;
+    for (let et of this.expenseTypes) {
+      if (et.id?.valueOf() == value?.valueOf()) {
         return true;
       }
     }
     return false;
   }
 
-  getExpenseTypes(): ExpenseType[] {
-    this.expenseTypes = WebStorageUtil.get(Constants.EXPENSETYPE_KEY);
-    return this.expenseTypes;
+  getExpenseTypes() {
+    return this.http.get(`${this.apiUrl}`);
   }
 
-  notifyTotalExpenseTypes() {
-    this.expenseTypeSource.next(this.getExpenseTypes()?.length);
-  }
-
-  asObservable(): Observable<number> {
-    return this.expenseTypeSource;
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Ocorreu um erro:', error.error.message);
+    } else {
+      console.error(
+        `cod do erro no backend ${error.status}, ` + `mensagem: ${error.error}`
+      );
+    }
+    return throwError('Ocorreu um erro.');
   }
 }
