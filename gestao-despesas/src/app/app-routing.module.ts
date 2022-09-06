@@ -9,6 +9,7 @@ import { ReceitaComponent } from './receita/receita.component';
 import { AuthenticationGuard } from './util/authentication.guard';
 import { NotAuthorizedComponent } from './notauthorized/notauthorized.component';
 import { DespesaComponent } from './despesa/despesa.component';
+import { TiposDespesaComponent } from './tipos-despesa/tipos-despesa.component';
 
 const routes: Routes = [
   {
@@ -17,10 +18,11 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'tipos-despesa', component: TiposDespesaComponent },
   { path: 'formas-pagamento', component: FormasPagamentoComponent },
-  { path: 'receita', component: ReceitaComponent },
-  { path: 'despesa/detalhes/:id/:description/:value/:expenseTypeId/:expenseTypeDescription', component: DespesaDetalheComponent },
   { path: 'despesa', component: DespesaComponent },
+  { path: 'receita', component: ReceitaComponent },
+  { path: 'despesa/detalhes/:id/:date/:description/:value/:paymentTypeId/:paymentTypeDescription/:expenseTypeId/:expenseTypeDescription', component: DespesaDetalheComponent },
   { path: 'nao-autorizado', component: NotAuthorizedComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

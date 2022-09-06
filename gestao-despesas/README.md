@@ -1,5 +1,11 @@
 # GestaoDespesas
 
+Para executar o projeto Gestao de Despesas execute os dois comandos abaixo,
+em Terminal separado:
+
+> npm run json:server:routes
+> npm start
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 
 ## Development server

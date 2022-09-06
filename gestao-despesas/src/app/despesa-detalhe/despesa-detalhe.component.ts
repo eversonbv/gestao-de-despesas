@@ -1,6 +1,6 @@
 import { DespesaService } from './../despesa/despesa.service';
-import { ExpenseTypeStorageService } from './../formas-pagamento/expenseType-storage.service';
-import { ExpenseType } from './../model/expenseType';
+import { PaymentTypeStorageService } from '../formas-pagamento/paymentType-storage.service';
+import { PaymentType } from './../model/paymentType';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Expense } from '../model/expense';
@@ -17,24 +17,29 @@ export class DespesaDetalheComponent implements OnInit {
 
   expense!: Expense;
   listaDespesas!: Expense[];
-  expenseTypes!: ExpenseType[];
+  paymentTypes!: PaymentType[];
+  paymentTypeDescription!: String;
   expenseTypeDescription!: String;
   handleUpdateResponse: any;
 
   constructor(
     private route: ActivatedRoute,
     private despesaService: DespesaService,
-    private expenseTypeService: ExpenseTypeStorageService,
+    private paymentTypeService: PaymentTypeStorageService,
   ) {}
 
   ngOnInit(): void {
     let idParam: number = + this.route.snapshot.paramMap.get('id')!;
+    let dateParam: string = this.route.snapshot.paramMap.get('date')!;
     let descriptionParam: string = this.route.snapshot.paramMap.get('description')!;
     let valueParam: number = + this.route.snapshot.paramMap.get('value')!;
+    let paymentTypeId: number = + this.route.snapshot.paramMap.get('paymentTypeId')!;
+    let paymentTypeDescr: string = this.route.snapshot.paramMap.get('paymentTypeDescription')!;
     let expenseTypeId: number = + this.route.snapshot.paramMap.get('expenseTypeId')!;
     let expenseTypeDescr: string = this.route.snapshot.paramMap.get('expenseTypeDescription')!;
 
-    this.expense = new Expense(idParam, descriptionParam, valueParam, expenseTypeId);
+    this.expense = new Expense(idParam, new Date(dateParam + " GMT-0300"), descriptionParam, valueParam, expenseTypeId, paymentTypeId);
+    this.paymentTypeDescription = paymentTypeDescr;
     this.expenseTypeDescription = expenseTypeDescr;
 
   }
@@ -49,9 +54,9 @@ export class DespesaDetalheComponent implements OnInit {
   }
 
   listarFormasPagamento() {
-    this.expenseTypeService.getExpenseTypes().subscribe(
+    this.paymentTypeService.getPaymentTypes().subscribe(
       (response) => {
-        this.expenseTypes = response as ExpenseType[];
+        this.paymentTypes = response as PaymentType[];
       },
       (error) => {}
     );

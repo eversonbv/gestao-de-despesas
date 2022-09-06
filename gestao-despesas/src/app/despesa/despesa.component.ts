@@ -1,10 +1,12 @@
-import { ExpenseTypeStorageService } from './../formas-pagamento/expenseType-storage.service';
-import { ExpenseType } from './../model/expenseType';
+import { PaymentTypeStorageService } from '../formas-pagamento/paymentType-storage.service';
+import { PaymentType } from './../model/paymentType';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Expense } from '../model/expense';
-import { DespesaService } from './despesa.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { TipoDespesaService } from '../tipos-despesa/tipos-despesa.service';
+import { DespesaService } from './despesa.service';
+import { ExpenseType } from '../model/expenseType';
 
 @Component({
   selector: 'app-despesa',
@@ -16,7 +18,8 @@ export class DespesaComponent implements OnInit {
 
   expense!: Expense;
   listaDespesas?: Expense[];
-  listaFormasPagamento!: ExpenseType[];
+  listaFormasPagamento!: PaymentType[];
+  listaTiposDespesa!: ExpenseType[];
 
   isSubmitted!: boolean;
   isShowMessage: boolean = false;
@@ -25,20 +28,31 @@ export class DespesaComponent implements OnInit {
 
   constructor(
     private despesaService: DespesaService,
-    private expenseTypeService: ExpenseTypeStorageService,
+    private paymentTypeService: PaymentTypeStorageService,
+    private expenseTypeService: TipoDespesaService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.expense = new Expense(Math.round(Math.random() * 1000), '', 0, 0);
+    this.expense = new Expense(Math.round(Math.random() * 1000), new Date(), '', 0, 0, 0);
     this.listarFormasPagamento();
+    this.listarTiposDespesas();
     this.listarTodos();
   }
 
   listarFormasPagamento() {
-    this.expenseTypeService.getExpenseTypes().subscribe(
+    this.paymentTypeService.getPaymentTypes().subscribe(
       (response) => {
         this.listaFormasPagamento = response as Expense[];
+      },
+      (error) => {}
+    );
+  }
+
+  listarTiposDespesas() {
+    this.expenseTypeService.getExpenseTypes().subscribe(
+      (response) => {
+        this.listaTiposDespesa = response as Expense[];
       },
       (error) => {}
     );
@@ -58,6 +72,17 @@ export class DespesaComponent implements OnInit {
     for (let fp of this.listaFormasPagamento) {
       if (fp.id?.valueOf() == id?.valueOf()) {
         retorno = fp.description;
+        break;
+      }
+    }
+    return retorno;
+  }
+
+  retornarDescrTipoDespesa(id: number): string {
+    let retorno: string = "";
+    for (let td of this.listaTiposDespesa) {
+      if (td.id?.valueOf() == id?.valueOf()) {
+        retorno = td.description;
         break;
       }
     }
@@ -86,15 +111,16 @@ export class DespesaComponent implements OnInit {
     this.message = 'Despesa lançada com sucesso!';
 
     this.form.reset();
-    this.expense = new Expense(Math.round(Math.random() * 1000), '', 0, 0);
+    this.expense = new Expense(Math.round(Math.random() * 1000), new Date(), '', 0, 0, 0);
 
     this.listarTodos();
   }
 
-  onDetail(id: number, description: string, value: number, expenseTypeId: number){
+  onDetail(id: number, date: Date, description: string, value: number, paymentTypeId: number, expenseTypeId: number){
 
-    let formaPagamento = this.retornarDescrFormaPagamento(expenseTypeId);
-    this.router.navigate(['/despesa/detalhes', id, description, value, expenseTypeId, formaPagamento]);
+    let formaPagamento = this.retornarDescrFormaPagamento(paymentTypeId);
+    let tipoDespesa = this.retornarDescrTipoDespesa(expenseTypeId);
+    this.router.navigate(['/despesa/detalhes', id, date, description, value, paymentTypeId, formaPagamento, expenseTypeId, tipoDespesa]);
   }
 
   onEdit(expense: Expense) {
