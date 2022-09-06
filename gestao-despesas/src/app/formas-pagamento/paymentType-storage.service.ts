@@ -4,7 +4,7 @@ import { Constants } from 'src/app/util/constants';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { WebStorageUtil } from 'src/app/util/web-storage-util';
-import { ExpenseType } from '../model/expenseType';
+import { PaymentType } from '../model/paymentType';
 import {
   HttpClient,
   HttpHeaders,
@@ -14,11 +14,11 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class ExpenseTypeStorageService {
-  apiUrl: string = 'http://localhost:3000/expensetypes';
+export class PaymentTypeStorageService {
+  apiUrl: string = 'http://localhost:3000/paymenttypes';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  expenseTypes!: ExpenseType[];
+  paymentTypes!: PaymentType[];
 
   constructor(private http: HttpClient) {}
 
@@ -34,19 +34,19 @@ export class ExpenseTypeStorageService {
       .pipe(catchError(this.handleError));
   }
 
-  delete(id: number): Observable<ExpenseType> {
+  delete(id: number): Observable<PaymentType> {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http
-      .delete<ExpenseType>(API_URL, { headers: this.headers })
+      .delete<PaymentType>(API_URL, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   isExist(value: number): boolean {
-    this.getExpenseTypes().subscribe((response) => {
-      this.expenseTypes = response as ExpenseType[];
+    this.getPaymentTypes().subscribe((response) => {
+      this.paymentTypes = response as PaymentType[];
     });
-    if (this.expenseTypes == null) return false;
-    for (let et of this.expenseTypes) {
+    if (this.paymentTypes == null) return false;
+    for (let et of this.paymentTypes) {
       if (et.id?.valueOf() == value?.valueOf()) {
         return true;
       }
@@ -54,7 +54,7 @@ export class ExpenseTypeStorageService {
     return false;
   }
 
-  getExpenseTypes() {
+  getPaymentTypes() {
     return this.http.get(`${this.apiUrl}`);
   }
 
@@ -66,6 +66,6 @@ export class ExpenseTypeStorageService {
         `cod do erro no backend ${error.status}, ` + `mensagem: ${error.error}`
       );
     }
-    return throwError('Ocorreu um erro.');
+    return throwError(() => new Error('Ocorreu um erro.'));
   }
 }

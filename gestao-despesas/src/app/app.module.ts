@@ -23,6 +23,7 @@ import { ModalComponent } from './modal/modal.component';
 import { NotAuthorizedComponent } from './notauthorized/notauthorized.component';
 import { DespesaComponent } from './despesa/despesa.component';
 import { DespesaDetalheComponent } from './despesa-detalhe/despesa-detalhe.component';
+import { TiposDespesaComponent } from './tipos-despesa/tipos-despesa.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DespesaDetalheComponent } from './despesa-detalhe/despesa-detalhe.compo
     NotAuthorizedComponent,
     DespesaComponent,
     DespesaDetalheComponent,
+    TiposDespesaComponent,
   ],
   imports: [
     BrowserModule,

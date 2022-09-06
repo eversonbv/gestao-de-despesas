@@ -63,6 +63,6 @@ export class DespesaService {
         `cod do erro no backend ${error.status}, ` + `mensagem: ${error.error}`
       );
     }
-    return throwError('Ocorreu um erro.');
+    return throwError(() => new Error('Ocorreu um erro.'));
   }
 }

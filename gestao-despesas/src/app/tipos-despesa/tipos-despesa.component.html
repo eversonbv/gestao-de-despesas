@@ -1,5 +1,5 @@
 <div class="container contact">
-  <h5>Cadastro de Formas de Pagamento</h5>
+  <h5>Cadastro de Tipos de Despesas</h5>
   <hr />
   <div class="row">
     <div class="col s12">
@@ -19,7 +19,7 @@
           id="input-id"
           name="input-id"
           type="text"
-          [(ngModel)]="this.paymentType.id"
+          [(ngModel)]="this.expenseType.id"
           hidden="true"
         />
       </div>
@@ -29,7 +29,7 @@
           name="input-description"
           type="text"
           class="validate"
-          [(ngModel)]="this.paymentType.description"
+          [(ngModel)]="this.expenseType.description"
           pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)*"
           #description="ngModel"
           required
@@ -60,7 +60,7 @@
   </div>
 
   <h5>Formas de Pagamento cadastradas</h5>
-  <table class="highlight" *ngIf="paymentTypes && paymentTypes!.length > 0">
+  <table class="highlight" *ngIf="expenseTypes && expenseTypes!.length > 0">
     <thead>
       <tr>
         <th>Descrição</th>
@@ -69,7 +69,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let f of paymentTypes">
+      <tr *ngFor="let f of expenseTypes">
         <td>{{ f.description | titlecase }}</td>
         <td class="right">
           <a
@@ -89,12 +89,12 @@
     </tbody>
   </table>
 
-  <div *ngIf="!paymentTypes || paymentTypes!.length == 0">
+  <div *ngIf="!expenseTypes || expenseTypes!.length == 0">
     <div class="row">
       <div class="center-align">
         <i class="col s12 material-icons large">mood_bad</i>
         <span class="col s12 flow-text"
-          >Nenhuma forma de pagamento cadastrada!</span
+          >Nenhum Tipo de Despesa cadastrado!</span
         >
       </div>
     </div>

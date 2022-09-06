@@ -1,11 +1,10 @@
 # GestaoDespesas
 
-Para rodar o projeto Destão de Despesas execute os comandos abaixo, em terminais separados:
+Para executar o projeto Gestao de Despesas execute os dois comandos abaixo,
+em Terminal separado:
 
-Para rodar o Json-Server:
-npm run json:server:routes
-Para rodar a aplicação:
-npm start
+> npm run json:server:routes
+> npm start
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 

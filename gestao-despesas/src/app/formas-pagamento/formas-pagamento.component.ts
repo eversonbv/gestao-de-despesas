@@ -1,37 +1,37 @@
-import { ExpenseType } from './../model/expenseType';
+import { PaymentType } from './../model/paymentType';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ExpenseTypeStorageService } from './expenseType-storage.service';
+import { PaymentTypeStorageService } from './paymentType-storage.service';
 import { Shared } from '../util/shared';
 
 @Component({
   selector: 'app-formas-pagamento',
   templateUrl: './formas-pagamento.component.html',
   styleUrls: ['./formas-pagamento.component.css'],
-  providers: [ExpenseTypeStorageService],
+  providers: [PaymentTypeStorageService],
 })
 export class FormasPagamentoComponent implements OnInit {
   @ViewChild('form') form!: NgForm;
 
-  expenseType!: ExpenseType;
-  expenseTypes?: ExpenseType[];
+  paymentType!: PaymentType;
+  paymentTypes?: PaymentType[];
 
   isSubmitted!: boolean;
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private expenseTypeService: ExpenseTypeStorageService) { }
+  constructor(private paymentTypeService: PaymentTypeStorageService) { }
 
   ngOnInit(): void {
-    this.expenseType = new ExpenseType(Math.round(Math.random() * 1000), '');
+    this.paymentType = new PaymentType(Math.round(Math.random() * 1000), '');
     this.listarFormasPagamento();
   }
 
   listarFormasPagamento() {
-    this.expenseTypeService.getExpenseTypes().subscribe(
+    this.paymentTypeService.getPaymentTypes().subscribe(
       (response) => {
-        this.expenseTypes = response as ExpenseType[];
+        this.paymentTypes = response as PaymentType[];
       },
       (error) => {}
     );
@@ -39,15 +39,15 @@ export class FormasPagamentoComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true;
-    if (!this.expenseTypeService.isExist(this.expenseType.id)) {
-      this.expenseTypeService.save(this.expenseType).subscribe(
+    if (!this.paymentTypeService.isExist(this.paymentType.id)) {
+      this.paymentTypeService.save(this.paymentType).subscribe(
         (response) => {
           this.listarFormasPagamento();
         },
         (error) => {}
       );
     } else {
-      this.expenseTypeService.update(this.expenseType.id, this.expenseType).subscribe(
+      this.paymentTypeService.update(this.paymentType.id, this.paymentType).subscribe(
         (response) => {
           this.listarFormasPagamento();
         },
@@ -59,15 +59,15 @@ export class FormasPagamentoComponent implements OnInit {
     this.message = 'Forma de Pagamento cadastrada com sucesso!';
 
     this.form.reset();
-    this.expenseType = new ExpenseType(Math.round(Math.random() * 1000), '');
+    this.paymentType = new PaymentType(Math.round(Math.random() * 1000), '');
 
     this.listarFormasPagamento();
 
   }
 
-  onEdit(expenseType: ExpenseType) {
-    let clone = ExpenseType.clone(expenseType);
-    this.expenseType = clone;
+  onEdit(paymentType: PaymentType) {
+    let clone = PaymentType.clone(paymentType);
+    this.paymentType = clone;
   }
 
   onDelete(id: number, description: string) {
@@ -77,7 +77,7 @@ export class FormasPagamentoComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    this.expenseTypeService.delete(id).subscribe(
+    this.paymentTypeService.delete(id).subscribe(
       (response) => {
         this.listarFormasPagamento();
       },

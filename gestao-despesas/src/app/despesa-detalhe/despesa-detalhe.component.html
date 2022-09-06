@@ -9,6 +9,10 @@
           <span class="badge left">ID:</span>{{ this.expense.id }}
         </li>
         <li class="collection-item">
+          <span class="badge left">Data:</span
+          >{{ this.expense.date | date: 'dd/MM/yyyy' }}
+        </li>
+        <li class="collection-item">
           <span class="badge left">Descrição:</span
           >{{ this.expense.description }}
         </li>
@@ -18,6 +22,10 @@
         </li>
         <li class="collection-item">
           <span class="badge left">Forma de Pagamento:</span
+          >{{ this.paymentTypeDescription }}
+        </li>
+        <li class="collection-item">
+          <span class="badge left">Tipo da Despesa:</span
           >{{ this.expenseTypeDescription }}
         </li>
       </ul>
