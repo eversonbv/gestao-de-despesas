@@ -86,16 +86,19 @@
   "revenues": [
     {
       "id": 1,
+      "date": "2022-08-23",
       "description": "Salário Fevereiro",
-      "value": 2000
+      "value": 2500
     },
     {
       "id": 2,
+      "date": "2022-08-20",
       "description": "Salário Março",
       "value": 2000
     },
     {
       "id": 3,
+      "date": "2022-07-14",
       "description": "Bico",
       "value": 3000
     }
