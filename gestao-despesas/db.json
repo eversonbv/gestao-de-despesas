@@ -1,0 +1,106 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "everson.volaco",
+      "password": "12345678",
+      "balance": 1000.1
+    },
+    {
+      "id": "2",
+      "username": "natalia.volaco",
+      "password": "123456",
+      "balance": 500
+    }
+  ],
+  "paymenttypes": [
+    {
+      "id": 1,
+      "description": "Dinheiro"
+    },
+    {
+      "id": 2,
+      "description": "PIX"
+    },
+    {
+      "id": 3,
+      "description": "Cartão de Crédito"
+    },
+    {
+      "id": 4,
+      "description": "Cartão de Débito"
+    },
+    {
+      "id": 121,
+      "description": "Vale Refeição"
+    }
+  ],
+  "expensetypes": [
+    {
+      "id": 1,
+      "description": "Combustível"
+    },
+    {
+      "id": 2,
+      "description": "Alimentação"
+    },
+    {
+      "id": 3,
+      "description": "Vestiário"
+    },
+    {
+      "id": 4,
+      "description": "Aluguel"
+    },
+    {
+      "id": 5,
+      "description": "Energia Elétrica"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "date": "2022-08-20",
+      "description": "Abastecimento Posto",
+      "value": 235,
+      "paymentTypeId": 2,
+      "expenseTypeId": 1
+    },
+    {
+      "id": 2,
+      "date": "2022-08-05",
+      "description": "Café",
+      "value": 12,
+      "paymentTypeId": 3,
+      "expenseTypeId": 2
+    },
+    {
+      "id": 3,
+      "date": "2022-08-23",
+      "description": "Mc Donalds Portão",
+      "value": 46,
+      "paymentTypeId": 1,
+      "expenseTypeId": 3
+    }
+  ],
+  "revenues": [
+    {
+      "id": 1,
+      "date": "2022-08-23",
+      "description": "Salário Fevereiro",
+      "value": 2500
+    },
+    {
+      "id": 2,
+      "date": "2022-08-20",
+      "description": "Salário Março",
+      "value": 2000
+    },
+    {
+      "id": 3,
+      "date": "2022-07-14",
+      "description": "Bico",
+      "value": 3000
+    }
+  ]
+}

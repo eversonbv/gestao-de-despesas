@@ -1,0 +1,136 @@
+<div class="container contact">
+  <h5>Lançamento de Receitas</h5>
+  <hr />
+
+  <div class="row">
+    <div class="col s12">
+      <div
+        id="msg-login"
+        class="card-panel white-text"
+        [class.red]="!this.isSuccess"
+        [class.blue]="this.isSuccess"
+        *ngIf="this.isShowMessage"
+      >
+        {{ this.message }}
+      </div>
+    </div>
+    <form class="col s12" #form="ngForm" (submit)="onSubmit()">
+      <div class="input-field col s12">
+        <input
+          id="input-id"
+          name="input-id"
+          type="text"
+          [(ngModel)]="this.revenue.id"
+          hidden="true"
+        />
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="input-data"
+            name="input-data"
+            type="date"
+            class="validate"
+            [(ngModel)]="this.revenue.date"
+            #data="ngModel"
+            required
+          />
+          <label for="input-data" class="active">Data da Receita</label>
+          <div
+            class="red-text"
+            *ngIf="data.errors?.['required'] && data.touched"
+          >
+            A Data da Receita obrigatória
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="input-description"
+            name="input-description"
+            type="text"
+            class="validate"
+            [(ngModel)]="this.revenue.description"
+          />
+          <label for="input-description">Descrição</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="input-deposit"
+            name="input-deposit"
+            type="text"
+            class="validate money"
+            [(ngModel)]="this.revenue.value"
+            mask="separator.2"
+            [thousandSeparator]="'.'"
+            [decimalMarker]="','"
+            prefix="R$ "
+            [dropSpecialCharacters]="true"
+            [showMaskTyped]="false"
+          />
+          <label for="input-deposit" class="active">Valor de depósito</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light blue darken-4" type="submit">
+        Depositar
+        <i class="material-icons right">save</i>
+      </button>
+      <button
+        style="margin-left: 10px"
+        class="btn waves-effect waves-light blue darken-4"
+        type="button"
+        (click)="onResetClick()"
+      >
+        Apagar
+        <i class="material-icons right">delete</i>
+      </button>
+    </form>
+  </div>
+
+  <h6>Receitas Lançadas</h6>
+  <table class="highlight" *ngIf="listaReceitas && listaReceitas!.length > 0">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th class="right">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let f of listaReceitas">
+        <td>{{ f.date | date:'dd/MM/yyyy' }}</td>
+        <td>{{ f.description | titlecase }}</td>
+        <td>{{ f.value.toString() | titlecase }}</td>
+        <td class="right">
+          <a
+            ><i class="material-icons my-icon-size" (click)="onEdit(f)"
+              >edit</i
+            ></a
+          >
+          <a
+            ><i
+              class="material-icons my-icon-size"
+              (click)="onDelete(f.id, f.description)"
+              >delete</i
+            ></a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!listaReceitas || listaReceitas!.length == 0">
+    <div class="row">
+      <div class="center-align">
+        <i class="col s12 material-icons large">mood_bad</i>
+        <span class="col s12 flow-text">Nenhuma Receita lancada!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
