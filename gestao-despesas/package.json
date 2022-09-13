@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/gestao-de-despesas/ --deploy-url=https://eversonbv.github.io/gestao-de-despesas/",
+    "ghpages": "ng deploy --base-href=/gestao-de-despesas/ --repo=https://github.com/eversonbv/gestao-de-despesas.git --name=eversonbv --email=everson.volaco@gmail.com --no-silent",
+    "deploy": "npm run build & npm run ghpages",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "json:server": "json-server --watch db.json",
@@ -23,6 +25,7 @@
     "@angular/router": "^14.1.0",
     "@material/form-field": "^14.0.0",
     "@ng-select/ng-select": "^9.0.2",
+    "angular-cli-ghpages": "^1.0.3",
     "echarts": "^5.3.3",
     "jquery": "^3.6.0",
     "json-server": "^0.17.0",
