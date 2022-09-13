@@ -7,6 +7,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { NotAuthorizedComponent } from './notauthorized/notauthorized.component'
 import { DespesaComponent } from './despesa/despesa.component';
 import { DespesaDetalheComponent } from './despesa-detalhe/despesa-detalhe.component';
 import { TiposDespesaComponent } from './tipos-despesa/tipos-despesa.component';
+import { ReceitasDespesasComponent } from './receitas-despesas/receitas-despesas.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { TiposDespesaComponent } from './tipos-despesa/tipos-despesa.component';
     DespesaComponent,
     DespesaDetalheComponent,
     TiposDespesaComponent,
+    ReceitasDespesasComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,9 @@ import { TiposDespesaComponent } from './tipos-despesa/tipos-despesa.component';
     CommonModule,
     FormsModule,
     NgSelectModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

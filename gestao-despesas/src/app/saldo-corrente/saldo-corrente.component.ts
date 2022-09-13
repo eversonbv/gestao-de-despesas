@@ -17,7 +17,7 @@ export class SaldoCorrenteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.value > 0)
+    if (this.value < 0)
       setTimeout(() => {
         this.saldoPositivoEvento.emit(true);
       }, 2000);

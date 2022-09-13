@@ -3,7 +3,7 @@
     <div class="nav-wrapper blue accent-3">
       <div class="container">
         <a class="brand-logo" routerLink="/inicio">
-          <img class="my-logo" src="/assets/resources/images/logo.png" />
+          <img class="my-logo" src="assets/resources/images/logo.png" />
         </a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
@@ -14,10 +14,18 @@
               >Formas de Pagamento</a
             >
           </li>
-          <li><a routerLink="/tipos-despesa" class="flow-text">Tipos de Despesas</a></li>
+          <li>
+            <a routerLink="/tipos-despesa" class="flow-text"
+              >Tipos de Despesas</a
+            >
+          </li>
           <li><a routerLink="/receita" class="flow-text">Receitas</a></li>
           <li><a routerLink="/despesa" class="flow-text">Despesas</a></li>
-          <li><a routerLink="/inicio" class="flow-text">Receitas X Despesas</a></li>
+          <li>
+            <a routerLink="/receitas-despesas" class="flow-text"
+              >Receitas X Despesas</a
+            >
+          </li>
           <li><a class="flow-text" (click)="onLogout()">Sair</a></li>
         </ul>
       </div>
@@ -36,11 +44,21 @@
       </div>
     </div>
     <div *ngIf="this.loggedIn">
-      <li><a routerLink="/formas-pagamento" class="flow-text">Formas de Pagamento</a></li>
-      <li><a routerLink="/tipos-despesa" class="flow-text">Tipos de Despesas</a></li>
+      <li>
+        <a routerLink="/formas-pagamento" class="flow-text"
+          >Formas de Pagamento</a
+        >
+      </li>
+      <li>
+        <a routerLink="/tipos-despesa" class="flow-text">Tipos de Despesas</a>
+      </li>
       <li><a routerLink="/receita" class="flow-text">Receitas</a></li>
       <li><a routerLink="/despesa" class="flow-text">Despesas</a></li>
-      <li><a routerLink="/inicio" class="flow-text">Receitas X Despesas</a></li>
+      <li>
+        <a routerLink="/receitas-despesas" class="flow-text"
+          >Receitas X Despesas</a
+        >
+      </li>
       <li><a class="flow-text" (click)="onLogout()">Sair</a></li>
     </div>
   </ul>

@@ -1,9 +1,13 @@
+<app-modal [show]="modal.show" [content]="modal" (closeEvent)="onCloseModal()">
+</app-modal>
 <div
   class="intro blue z-depth-1 my-logo-text"
   [ngStyle]="this.getBackgroundImage()"
 >
   <h1 class="grey-text text-lighten-5">Gestão de Depesas</h1>
-  <h4 class="blue-text text-darken-1">Controle suas Despesas de forma simples!</h4>
+  <h4 class="blue-text text-darken-1">
+    Controle suas Despesas de forma simples!
+  </h4>
 </div>
 
 <div class="container about">
@@ -28,7 +32,7 @@
         </a>
       </div>
       <div class="col s12 m6">
-        <a routerLink="/inicio">
+        <a routerLink="/receitas-despesas">
           <div class="card-panel amber accent-4 center my-card-button">
             <span class="white-text flow-text"> DESPESAS X RECEITAS </span>
           </div>
@@ -43,4 +47,15 @@
       </div>
       <!-- opções -->
     </div>
+    <h5>Saldo Atual</h5>
   </div>
+  <div *ngIf="loading">Carregando o Saldo Atual...</div>
+  <div *ngIf="!loading">
+    {{ this.calcularSaldoAtual() }}
+    <app-saldo-corrente
+      #balance
+      [value]="this.value"
+      (saldoPositivoEvento)="this.onSaldoPositivoEvento($event)"
+    ></app-saldo-corrente>
+  </div>
+</div>

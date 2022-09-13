@@ -1,0 +1,27 @@
+<div class="container contact">
+  <h5>Receitas X Despesas</h5>
+  <div *ngIf="loading">Carregando o Saldo Atual...</div>
+  <div *ngIf="!loading">
+    {{ this.calcularTotais() }}
+    <div id="barra"></div>
+    <div id="pizza"></div>
+    <div style="width: 100%; overflow: hidden">
+      <div
+        style="width: 600px; float: left"
+        echarts
+        [options]="barChartOption"
+        [merge]="barLoadChartOptions"
+        class="demo-chart"
+      ></div>
+      <div
+        style="margin-left: 620px"
+        echarts
+        [options]="pieChartOption"
+        [merge]="pieLoadChartOptions"
+        class="demo-chart"
+      ></div>
+    </div>
+    <div>Total de Receitas: {{this.totalReceitas | currency: "BRL" }}</div>
+    <div>Total de Despesas: {{this.totalDespesas | currency: "BRL" }}</div>
+  </div>
+</div>
